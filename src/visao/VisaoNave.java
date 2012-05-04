@@ -9,12 +9,12 @@ import edugraf.jadix.tiposPrimitivos.Coordenadas;
 
 public class VisaoNave extends Renderizador {
 
-	private Imagem nave;
+	private Imagem imgNave;
 	private Nave naveMae;
 	
 	public VisaoNave(PaginaDix pag, Nave naveMae) {
 		super(pag);
-		this.nave = criarImg("Nave", nave, "recursos/nave.png", 0,
+		this.imgNave = criarImg("Nave", imgNave, "recursos/nave.png", 0,
 				new Coordenadas(naveMae.getXDefault(), naveMae.getYDefault()));
 		
 		this.naveMae = naveMae;
@@ -22,11 +22,7 @@ public class VisaoNave extends Renderizador {
 	}
 
 	
-	public void redesenhar(){
-		
-		nave.fixarEsquerda( naveMae.retornaX());
-		nave.fixarTopo(naveMae.retornaY());
-	}
+	
 
 	
 	
@@ -35,8 +31,8 @@ public class VisaoNave extends Renderizador {
 	public void update(Observable o, Object arg) {
 		
 		
-		this.redesenhar();
 		
+		redesenhar(imgNave, naveMae.retornaX(), naveMae.retornaY() );
 
 	}
 	

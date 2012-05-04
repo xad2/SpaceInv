@@ -17,7 +17,8 @@ public class Movimentador extends ModeloAbstrato {
 
 	public void movimentarEixoX(int passo) {
 		consertaLimite();
-		if (espaco.intersects(retangulo) && espaco.contains(retangulo) ) {
+		
+		if (espaco.contains(retangulo) ) {
 
 			int x = (int) retangulo.getX();
 			x += passo;
@@ -32,7 +33,7 @@ public class Movimentador extends ModeloAbstrato {
 	@Override
 	public void movimentarEixoY(int passo) {
 		consertaLimite();
-		if (espaco.intersects(retangulo) && espaco.contains(retangulo) ) {
+		if (espaco.contains(retangulo) ) {
 
 			int y = (int) retangulo.getY();
 			y += passo;

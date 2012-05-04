@@ -2,11 +2,13 @@ package modelo;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.Collection;
 
 public class Espaco extends Retangulo {
 
 	private Rectangle espaco;
 	private Rectangle retNave;
+	private Rectangle retAlien;
 
 	public Espaco() {
 
@@ -16,7 +18,12 @@ public class Espaco extends Retangulo {
 	}
 
 	public void criarMundo() {
-
+		
+		retAlien = criarRetangulo(new Dimension(33, 35));
+		espaco.add(retAlien);
+		
+		
+		
 		retNave = criarRetangulo(new Dimension(70, 70));
 		espaco.add(retNave);
 
@@ -36,6 +43,10 @@ public class Espaco extends Retangulo {
 	public Rectangle pegarRetangNave() {
 
 		return retNave;
+	}
+	
+	public Rectangle pegarRetangAlien(){
+		return retAlien;
 	}
 
 }

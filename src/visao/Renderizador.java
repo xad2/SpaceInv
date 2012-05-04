@@ -1,7 +1,5 @@
 package visao;
 
-
-
 import java.util.Observable;
 
 import edugraf.jadix.componentesDix.Imagem;
@@ -11,53 +9,39 @@ import edugraf.jadix.tiposPrimitivos.Coordenadas;
 
 public class Renderizador extends VisaoAbstrata {
 
-	
-	
-	
 	protected PaginaDix pag;
-	
-	
-	
-	public Renderizador(PaginaDix pag){
+	protected float interpolacao;
+
+	public Renderizador(PaginaDix pag) {
 		this.pag = pag;
-		
+
 	}
-	
-	public Imagem criarImg(String nomeImg, Imagem imagem,
-			String caminho, int profundidade, Coordenadas coord) {
-		
-		
+
+	public Imagem criarImg(String nomeImg, Imagem imagem, String caminho,
+			int profundidade, Coordenadas coord) {
+
 		imagem = pag.criarComponente(TiposDeComponentesDix.IMAGEM, nomeImg);
 		imagem.fixarURI(caminho);
 		imagem.fixarProfundidade(profundidade);
 		imagem.fixarCoordenadas(coord);
 		return imagem;
-		
-	}
-	
-	
 
-	
+	}
+
 	@Override
 	public void update(Observable o, Object arg) {
-		
-		
 
-		
 	}
 
 	@Override
-	public void redesenhar() {
-		// TODO Auto-generated method stub
-		
+	public void redesenhar(Imagem img, int x, int y) {
+		img.fixarEsquerda(x);
+		img.fixarTopo(y);
+
+	}
+	
+	public void recebeInterpolacao(float interpolacao){
+		this.interpolacao = interpolacao;
 	}
 
-	
-
-	
-
-	
-	
-	
-	
 }
