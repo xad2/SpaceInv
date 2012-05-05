@@ -1,5 +1,6 @@
 package visao;
 
+import java.awt.Dimension;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
@@ -28,9 +29,19 @@ public class VisaoAlien extends Renderizador {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		//JOptionPane.showMessageDialog(null, "X1: " + imgAlien.obterEsquerda() + "X2: " + alien.getX());
-		//JOptionPane.showMessageDialog(null, arg.toString());
-	
+		
+		if(alien.getEstado() == false){
+			
+			imgAlien = criarColisao(new Coordenadas(alien.getX(), alien.getY()), imgAlien);
+		}else
+		
+		
+		if(!alien.estaAndando()){
+			imgAlien.fixarProfundidade(-3);
+			//JOptionPane.showMessageDialog(null, "X1: " + imgAlien.obterEsquerda() + "X2: " + alien.getX());
+			imgAlien.desabilitar();
+			
+		}
 		
 		redesenhar(imgAlien, alien.getX(), alien.getY());
 	}

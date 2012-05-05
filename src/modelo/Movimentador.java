@@ -6,13 +6,18 @@ import javax.swing.JOptionPane;
 
 public class Movimentador extends ModeloAbstrato {
 
-	private Rectangle retangulo;
-	private Rectangle espaco;
+	protected Rectangle retangulo;
+	protected Rectangle espaco;
 
 	public Movimentador(Rectangle retangulo, Rectangle espaco) {
 
 		this.espaco = espaco;
 		this.retangulo = retangulo;
+	}
+	
+	public Movimentador(Nave nave, Espaco espaco){
+		
+		
 	}
 
 	public void movimentarEixoX(int passo) {
@@ -30,7 +35,7 @@ public class Movimentador extends ModeloAbstrato {
 	}
 
 	
-	@Override
+	
 	public void movimentarEixoY(int passo) {
 		consertaLimite();
 		if (espaco.contains(retangulo) ) {
@@ -73,5 +78,11 @@ public class Movimentador extends ModeloAbstrato {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+
+	
+	
+	
 
 }

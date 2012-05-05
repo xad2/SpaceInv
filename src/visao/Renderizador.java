@@ -40,8 +40,16 @@ public class Renderizador extends VisaoAbstrata {
 
 	}
 	
+	public Imagem criarColisao(Coordenadas coord, Imagem colisao){
+		return criarImg("Colisao", colisao, "recursos/colisao.gif", 1, coord);
+		
+	}
+	
+	
 	public void recebeInterpolacao(float interpolacao){
 		this.interpolacao = interpolacao;
 	}
+	
+	
 
 }

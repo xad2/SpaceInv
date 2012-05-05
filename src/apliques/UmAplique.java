@@ -34,12 +34,14 @@ public class UmAplique extends Aplique {
 		final int MAX_FRAMESKIP = 5;
 
 		long next_game_tick = System.currentTimeMillis();
-
+		
+	
 		espaco = new Espaco();
 		naveMae = new Nave(espaco);
 		alien = new Alien(espaco);
 		fachada = new Fachada(naveMae);
 
+		
 		new VisaoJogo(pagina);
 		vNave = new VisaoNave(pagina, naveMae);
 		vAlien = new VisaoAlien(pagina, alien);
@@ -58,11 +60,20 @@ public class UmAplique extends Aplique {
 			while (System.currentTimeMillis() > next_game_tick
 					&& loops < MAX_FRAMESKIP) {
 
-				alien.movimentarEixoX(-15);
-				// JOptionPane.showMessageDialog(null, "P");
+				alien.movimentarEixoX(-15 );
 				next_game_tick += SKIP_TICKS;
 				loops++;
 				alien.atualizar();
+				
+				
+				
+				if(naveMae.intersecciona(alien.getRetAlien())){
+					
+					naveMae.explodir();
+					JOptionPane.showMessageDialog(null, "");
+					alien.explodir();
+					break;
+				}
 				// float interpolacao = (float) System.currentTimeMillis() +
 				// SKIP_TICKS - next_game_tick / (float) SKIP_TICKS;
 

@@ -1,5 +1,6 @@
 package modelo;
 
+import java.awt.Rectangle;
 import java.util.Observable;
 
 public abstract class ModeloAbstrato extends Observable {
@@ -10,6 +11,8 @@ public abstract class ModeloAbstrato extends Observable {
 	public abstract void movimentarEixoY(int passo);
 	
 	public abstract void atualizar();
+	
+
 	
 	
 

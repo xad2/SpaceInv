@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 
-public abstract class Retangulo  {
+public abstract class Retangulo  extends ModeloAbstrato {
 
 	
 	
