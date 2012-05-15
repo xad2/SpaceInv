@@ -1,18 +1,18 @@
 package modelo;
 
+import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.Observable;
 
-public class Nave extends Espaco {
+public class Nave extends ModeloAbstrato {
 
 	private Rectangle retNave;
 	private Movimentador movimentador;
-	private boolean estado = true;
+	private Estado estado = Estado.VIVO;
 
-	
 	public Nave(Espaco espaco) {
 
-		retNave = espaco.pegarRetangNave();
+		retNave = new Rectangle(new Dimension(50, 45));
 		setPosicaoDefault();
 		movimentador = new Movimentador(retNave, espaco.pegarRetangEspaco());
 
@@ -49,33 +49,27 @@ public class Nave extends Espaco {
 		return (int) retNave.getY();
 	}
 
-	public void movimentarEixoX(int p) {
+	public boolean movimentarEixoX(int p) {
 
 		movimentador.movimentarEixoX(p);
-		
+
 		atualizar();
 
+		return true;
 	}
 
-	public void movimentarEixoY(int p) {
+	public boolean movimentarEixoY(int p) {
 
 		movimentador.movimentarEixoY(p);
 
 		atualizar();
+
+		return true;
 	}
 
-	public void parar() {
-
-		retNave.setLocation((int) retNave.getX(), (int) retNave.getY());
-		atualizar();
-
-	}
-	
-	public boolean getEstado(){
+	public Estado getEstado() {
 		return estado;
 	}
-	
-	
 
 	@Override
 	public void atualizar() {
@@ -84,8 +78,8 @@ public class Nave extends Espaco {
 	}
 
 	public void explodir() {
-		estado =false;
-		
+		estado = Estado.COLIDIU;
+
 		atualizar();
 	}
 

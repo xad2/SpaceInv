@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="file:/home/xad/.eclipse/org.eclipse.platform_3.7.0_155965261/plugins/br.ufsc.edugraf.dix_2010.9.2/transformacao/dix.xml"?>
+<página nome="Menu">
+
+<imagem nome="fundo" esquerda="0" topo="0"  uri="recursos/backgroundMenu.jpg"/>
+	
+	<etiqueta nome="Jogar" esquerda="100" topo="250" largura="30" altura="20" url="paginaJogo.dix.xml">
+	Jogar
+	</etiqueta>
+	<etiqueta nome="Regras" esquerda="100" topo="270" largura="30" altura="20" url="Regras.dix.xml">
+	Regras
+	</etiqueta>
+	
+</página>

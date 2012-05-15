@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="file:/home/xad/.eclipse/org.eclipse.platform_3.7.0_155965261/plugins/br.ufsc.edugraf.dix_2010.9.2/transformacao/dix.xml"?>
+<página nome="Regras">
+
+<etiqueta nome="Jogar" esquerda="50" topo="50" largura="500" altura="300">
+	Regras do jogo:
+	\n
+	1) Usando as teclas direcionais do teclado, sua nave deverá desviar-se dos alienígenas.\n
+	2) Se um alienígena atingir sua nave, o jogo termina.\n
+	\n
+	Implementações futuras:\n
+	
+	1)A nave poderá atirar contra os alienígenas, somando pontos e mostrando-os ao lado.
+	
+	
+	</etiqueta>
+
+</página>

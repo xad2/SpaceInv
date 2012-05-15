@@ -2,6 +2,10 @@ package visao;
 
 import java.util.Observable;
 
+import controle.ConfigObservador;
+import controle.ControladorDaNave;
+
+import modelo.Estado;
 import modelo.Nave;
 import edugraf.jadix.componentesDix.Imagem;
 import edugraf.jadix.fachada.PaginaDix;
@@ -10,28 +14,38 @@ import edugraf.jadix.tiposPrimitivos.Coordenadas;
 public class VisaoNave extends Renderizador {
 
 	private Imagem imgNave;
-	private Nave naveMae;
-
-	public VisaoNave(PaginaDix pag, Nave naveMae) {
+	private ControladorDaNave cNave;
+	
+	
+	
+	public VisaoNave(PaginaDix pag,ControladorDaNave cNave) {
 		super(pag);
-		this.imgNave = criarImg("Nave", imgNave, "recursos/nave.png", 0,
-				new Coordenadas(naveMae.getXDefault(), naveMae.getYDefault()));
-
-		this.naveMae = naveMae;
+		this.cNave = cNave;
+		this.imgNave = criarImg("Nave", "recursos/nave.png", 0,
+				new Coordenadas(cNave.getNaveMae().getXDefault(), cNave.getNaveMae().getYDefault()));
+	
+		new ConfigObservador(cNave.getNaveMae(), this);
 
 	}
-	
-	
 
 	@Override
 	public void update(Observable o, Object arg) {
 
-		if(naveMae.getEstado() == false){
-			imgNave = criarColisao(new Coordenadas(naveMae.getX(), naveMae.getY()), imgNave);
+		if (cNave.colidiu()){
+			desabilitar();
+			criarColisao(cNave.getCoord(), "ColisaoNave", 1);
 		}
-			
-		redesenhar(imgNave, naveMae.getX(), naveMae.getY());
+
+		redesenhar(imgNave, cNave.getNaveMae().getX(), cNave.getNaveMae().getY());
 
 	}
+	
+	public void desabilitar() {
+		
+		super.desabilitar(imgNave);
+	}
+
+	
+	
 
 }

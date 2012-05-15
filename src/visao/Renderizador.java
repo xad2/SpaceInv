@@ -3,23 +3,23 @@ package visao;
 import java.util.Observable;
 
 import edugraf.jadix.componentesDix.Imagem;
+import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.fachada.TiposDeComponentesDix;
 import edugraf.jadix.tiposPrimitivos.Coordenadas;
 
 public class Renderizador extends VisaoAbstrata {
 
-	protected PaginaDix pag;
-	protected float interpolacao;
+	private PaginaDix pag;
 
 	public Renderizador(PaginaDix pag) {
 		this.pag = pag;
-
 	}
 
-	public Imagem criarImg(String nomeImg, Imagem imagem, String caminho,
+	public Imagem criarImg(String nomeImg, String caminho,
 			int profundidade, Coordenadas coord) {
 
+		Imagem imagem;
 		imagem = pag.criarComponente(TiposDeComponentesDix.IMAGEM, nomeImg);
 		imagem.fixarURI(caminho);
 		imagem.fixarProfundidade(profundidade);
@@ -40,15 +40,20 @@ public class Renderizador extends VisaoAbstrata {
 
 	}
 	
-	public Imagem criarColisao(Coordenadas coord, Imagem colisao){
-		return criarImg("Colisao", colisao, "recursos/colisao.gif", 1, coord);
+	public Imagem criarColisao(Coordenadas coord, String nome, int n){
+		return criarImg(nome, "recursos/colisao" + n + ".gif",0, coord);
+		
+	}
+	
+	public void desabilitar(Imagem imagem){
+		
+		imagem.fixarProfundidade(-5);
+		imagem.tornarInvisivel();
+		imagem.desabilitar();
 		
 	}
 	
 	
-	public void recebeInterpolacao(float interpolacao){
-		this.interpolacao = interpolacao;
-	}
 	
 	
 

@@ -2,6 +2,9 @@ package controle;
 
 import java.util.Observable;
 
+import javax.swing.JOptionPane;
+
+import modelo.Fachada;
 import edugraf.jadix.eventos.EventoDeAreaSensivel;
 import edugraf.jadix.eventos.EventoDeGrade;
 import edugraf.jadix.eventos.EventoDeMouse;
@@ -12,30 +15,27 @@ import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.NotificavelPorDix;
 import edugraf.jadix.fachada.PaginaDix;
 
-import modelo.Fachada;
-
 public class TratadorDeEvento extends ControleAbstrato implements
 		NotificavelPorDix {
 
-	private ComponenteDix teclado;
+	private ControladorDoJogo controlador;
 	private Fachada fachada;
 
-	public TratadorDeEvento(PaginaDix pag, Fachada fachada) {
+	public TratadorDeEvento(PaginaDix pag, Fachada fachada, ControladorDoJogo controlador) {
 
 		this.fachada = fachada;
 		
-		teclado = pag.criarProcuradorDeComponente("teclado");
+		ComponenteDix teclado = pag.criarProcuradorDeComponente("teclado");
 		teclado.adicionarTratadorDeEventos(this);
 		
-
 	}
 	
-	// 1 = passo positivo
+	
 	@Override
 	public void seDito(EventoDeTeclado evento) {
 		
-		
 		int tecla = evento.obterTecla();
+		int dif = 1;
 		
 		if (evento.obterNomeDoEvento().toString() == "TECLA_REPETIDA") {
 			
@@ -49,19 +49,10 @@ public class TratadorDeEvento extends ControleAbstrato implements
 			else if(tecla == 38) // cima
 				fachada.movimentarNaveNoEixoY(-10);
 			else if(tecla == 40) 
-				fachada.movimentarNaveNoEixoY(10); //baixo
-			
+				fachada.movimentarNaveNoEixoY(10);
 		
-		} else if(evento.obterNomeDoComponente().toString() == "TECLA_SOLTA"){
-			
-			
-			
-			
-			if(tecla== 37 || tecla == 38 || tecla == 39 || tecla == 40){
-				
-				fachada.pararNaveNoEixoY();
-			}
-		}
+
+		} 
 	
 	}
 

@@ -26,9 +26,4 @@ public class Fachada {
 
 	}
 
-	public void pararNaveNoEixoY() {
-				
-		naveMae.parar();
-	}
-
 }

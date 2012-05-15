@@ -1,31 +1,39 @@
 package modelo;
 
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.util.Random;
 
 public class Alien extends ModeloAbstrato {
 
 	private Rectangle retAlien;
 	private Movimentador movimentador;
-	private boolean andando = true;
-	private boolean estado = true;
-	private Espaco espaco;
+	private Estado estado;
+	private int initialX, initialY;
 
-	public Alien(Espaco espaco) {
+	public Alien(Espaco espaco, int x, int y) {
 
-		retAlien = espaco.pegarRetangAlien();
-		gerarPosicaoDefault();
-		this.espaco = espaco;
+		retAlien = new Rectangle(new Dimension(25, 25));
+		this.initialX = x;
+		this.initialY = y;
+
+		setaPosicao(x, y);
+
 		movimentador = new Movimentador(retAlien, espaco.pegarRetangEspaco());
+		estado = Estado.VIVO;
+	}
+
+	public void setaPosicao(int x, int y) {
+
+		retAlien.setLocation(initialX, initialY);
+		atualizar();
 
 	}
 
-	public void gerarPosicaoDefault() {
-
-		int r = (int) (100 + Math.random() * 300);
-
-		retAlien.setLocation(967, r);
-
-	}
+	
+	
+	
+	
 
 	public Rectangle getRetAlien() {
 		return retAlien;
@@ -50,21 +58,18 @@ public class Alien extends ModeloAbstrato {
 	}
 
 	@Override
-	public void movimentarEixoX(int passo) {
+	public boolean movimentarEixoX(int passo) {
 
-		movimentador.movimentarEixoX(passo);
+		boolean movimentou = movimentador.movimentarEixoX(passo);
 
-		if (!espaco.contem(retAlien)) {
-			andando = false;
-		}
-		
 		atualizar();
+
+		return movimentou;
 	}
 
 	@Override
-	public void movimentarEixoY(int passo) {
-		// TODO Auto-generated method stub
-
+	public boolean movimentarEixoY(int passo) {
+		return false;
 	}
 
 	@Override
@@ -74,17 +79,19 @@ public class Alien extends ModeloAbstrato {
 
 	}
 
-	public boolean estaAndando() {
-		return andando;
-	}
-
-	public boolean getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
 	public void explodir() {
-		estado = false;
+		estado = Estado.COLIDIU;
 
+		atualizar();
+	}
+
+	public void resetaPosicao(int newY) {
+
+		retAlien.setLocation(initialX, newY);
 		atualizar();
 	}
 

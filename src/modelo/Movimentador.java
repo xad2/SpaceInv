@@ -6,58 +6,53 @@ import javax.swing.JOptionPane;
 
 public class Movimentador extends ModeloAbstrato {
 
-	protected Rectangle retangulo;
-	protected Rectangle espaco;
+	private Rectangle retangulo;
+	private Rectangle espaco;
 
 	public Movimentador(Rectangle retangulo, Rectangle espaco) {
 
+		assert(espaco.contains(retangulo));
+		
 		this.espaco = espaco;
 		this.retangulo = retangulo;
 	}
 	
-	public Movimentador(Nave nave, Espaco espaco){
-		
-		
+	public boolean movimentarEixoX(int passo) { 
+
+		int x = (int) retangulo.getX();
+		x += passo;
+
+		retangulo.setLocation(x, retangulo.y);
+
+		return !consertaLimite();
 	}
-
-	public void movimentarEixoX(int passo) {
-		consertaLimite();
-		
-		if (espaco.contains(retangulo) ) {
-
-			int x = (int) retangulo.getX();
-			x += passo;
-
-			retangulo.setLocation(x, retangulo.y);
-
-		}
-
-	}
-
 	
-	
-	public void movimentarEixoY(int passo) {
-		consertaLimite();
-		if (espaco.contains(retangulo) ) {
+	public boolean movimentarEixoY(int passo) {
+		int y = (int) retangulo.getY();
+		y += passo;
 
-			int y = (int) retangulo.getY();
-			y += passo;
-
-			retangulo.setLocation(retangulo.x, y);
-		}
+		retangulo.setLocation(retangulo.x, y);
+		
+		return !consertaLimite();
 	}
 
-	public void consertaLimite() {
+	public boolean consertaLimite() {
 
+		boolean fixed = false;
+		
 		if (espaco.getMaxX() < retangulo.getMaxX()) {
 			retangulo.setLocation((int) espaco.getMaxX() - retangulo.width,
 					(int) retangulo.getY());
-
-		} else if (espaco.getX() > retangulo.getX()) {
-
+			
+			fixed = true;
+		}
+		
+		if (espaco.getX() > retangulo.getX()) 
+		{
 			retangulo.setLocation((int) espaco.getX(), 
 					(int) retangulo.getY());
-
+			
+			fixed = true;
 		}
 
 		if (espaco.getMaxY() < retangulo.getMaxY() ) {
@@ -65,12 +60,16 @@ public class Movimentador extends ModeloAbstrato {
 			retangulo.setLocation((int) retangulo.getX(),
 					(int) espaco.getMaxY()- retangulo.height) ;
 
-		} else if (espaco.getY() > retangulo.getY()) {
+			fixed = true;
+		}
+		
+		if (espaco.getY() > retangulo.getY()) {
 
 			retangulo.setLocation((int) retangulo.getX(), (int) espaco.getY());
-
+			fixed = true;
 		}
 
+		return fixed;
 	}
 
 	@Override
