@@ -19,21 +19,16 @@ public class Alien extends ModeloAbstrato {
 
 		setaPosicao(x, y);
 
-		movimentador = new Movimentador(retAlien, espaco.pegarRetangEspaco());
+		movimentador = new Movimentador(retAlien, espaco.retangulo());
 		estado = Estado.VIVO;
 	}
 
 	public void setaPosicao(int x, int y) {
 
 		retAlien.setLocation(initialX, initialY);
-		atualizar();
+		atualizar(new String(initialX + "/" + initialY));
 
 	}
-
-	
-	
-	
-	
 
 	public Rectangle getRetAlien() {
 		return retAlien;
@@ -57,25 +52,26 @@ public class Alien extends ModeloAbstrato {
 		return retAlien.intersects(r);
 	}
 
-	@Override
 	public boolean movimentarEixoX(int passo) {
 
-		boolean movimentou = movimentador.movimentarEixoX(passo);
+		int x = (int) retAlien.getX() + passo;
+		boolean movimentou = movimentador.movimentarEixoX(x);
 
-		atualizar();
+		if (movimentou) {
+
+			atualizar(new String(x + "/"));
+		}
 
 		return movimentou;
 	}
 
-	@Override
 	public boolean movimentarEixoY(int passo) {
 		return false;
 	}
 
 	@Override
-	public void atualizar() {
-		setChanged();
-		notifyObservers();
+	public void atualizar(String argumento) {
+		notificarObservadores(argumento);
 
 	}
 
@@ -86,13 +82,16 @@ public class Alien extends ModeloAbstrato {
 	public void explodir() {
 		estado = Estado.COLIDIU;
 
-		atualizar();
+		atualizar(new String("Colidiu/"));
 	}
 
 	public void resetaPosicao(int newY) {
 
 		retAlien.setLocation(initialX, newY);
-		atualizar();
+
+		String x = initialX + "/" + newY;
+		atualizar(x);
+
 	}
 
 }

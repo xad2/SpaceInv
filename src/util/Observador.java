@@ -1,6 +1,6 @@
 package util;
 
-public abstract class Observador {
+public interface  Observador {
 
-	abstract void atualizar(String codigo);
+	 void atualizar(String codigo);
 }

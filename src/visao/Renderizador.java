@@ -28,10 +28,7 @@ public class Renderizador extends VisaoAbstrata {
 
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
 
-	}
 
 	@Override
 	public void redesenhar(Imagem img, int x, int y) {
@@ -50,6 +47,12 @@ public class Renderizador extends VisaoAbstrata {
 		imagem.fixarProfundidade(-5);
 		imagem.tornarInvisivel();
 		imagem.desabilitar();
+		
+	}
+
+	@Override
+	public void atualizar(String codigo) {
+		// TODO Auto-generated method stub
 		
 	}
 	

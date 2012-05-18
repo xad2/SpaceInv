@@ -2,7 +2,6 @@ package modelo;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.util.Observable;
 
 public class Nave extends ModeloAbstrato {
 
@@ -14,7 +13,7 @@ public class Nave extends ModeloAbstrato {
 
 		retNave = new Rectangle(new Dimension(50, 45));
 		setPosicaoDefault();
-		movimentador = new Movimentador(retNave, espaco.pegarRetangEspaco());
+		movimentador = new Movimentador(retNave, espaco.retangulo());
 
 	}
 
@@ -22,7 +21,7 @@ public class Nave extends ModeloAbstrato {
 
 		retNave.setLocation(240, 240);
 
-		atualizar();
+		atualizar("240/240");
 
 	}
 
@@ -51,18 +50,22 @@ public class Nave extends ModeloAbstrato {
 
 	public boolean movimentarEixoX(int p) {
 
-		movimentador.movimentarEixoX(p);
+		int y = (int) (retNave.getY());
+		int x = p + (int) retNave.getX();
+		movimentador.movimentarEixoX(x);
 
-		atualizar();
+		atualizar(x + "/" + y);
 
 		return true;
 	}
 
 	public boolean movimentarEixoY(int p) {
 
-		movimentador.movimentarEixoY(p);
+		int y = (int) (p + retNave.getY());
+		int x = (int) retNave.getX();
+		movimentador.movimentarEixoY(y);
 
-		atualizar();
+		atualizar(new String(x + "/" + y));
 
 		return true;
 	}
@@ -72,15 +75,14 @@ public class Nave extends ModeloAbstrato {
 	}
 
 	@Override
-	public void atualizar() {
-		setChanged();
-		notifyObservers();
+	public void atualizar(String argumento) {
+		notificarObservadores(argumento);
 	}
 
 	public void explodir() {
 		estado = Estado.COLIDIU;
 
-		atualizar();
+		atualizar(new String("Colidiu/"));
 	}
 
 }

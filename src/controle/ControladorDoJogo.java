@@ -21,22 +21,20 @@ public class ControladorDoJogo {
 	private Nave naveMae;
 	private Fachada fachada;
 	private ArrayList<VisaoAlien> aliensViews;
-	private VisaoJogo visaoJogo ;
+	private VisaoJogo visaoJogo;
 	private VisaoNave visaoNave;
 	private PaginaDix pagina;
 	private ControladorDaNave cNave;
-	
+
 	public ControladorDoJogo(PaginaDix pagina) {
 		this.pagina = pagina;
 		this.espaco = new Espaco();
 		this.aliens = TropaAlien.criarTropaAlien(espaco);
 		this.naveMae = new Nave(espaco);
 		this.fachada = new Fachada(naveMae);
-		
-		this.cNave = new ControladorDaNave(naveMae);
-		
+
 		this.visaoJogo = new VisaoJogo(pagina);
-		this.visaoNave = new VisaoNave(pagina, cNave);
+		this.visaoNave = new VisaoNave(pagina, naveMae);
 
 		this.aliensViews = new ArrayList<VisaoAlien>();
 		for (Alien alien : aliens)
@@ -68,32 +66,25 @@ public class ControladorDoJogo {
 				
 				Pichador pichador = new Pichador();
 				pichador.descansar(1);
+				
 				gameOver();
 				return false;
 
 			}
 
-			
-				
-			
 		}
 		return true;
 
 	}
 
 	public void gameOver() {
-		
-		
-		
-		
-		for(VisaoAlien vAlien: aliensViews){
+
+		for (VisaoAlien vAlien : aliensViews) {
 			vAlien.desabilitar();
 		}
+		visaoNave.desabilitar();
 		visaoJogo.trocarCaminho("recursos/Gameover.jpg");
-		
-		
-	}
 
-	
+	}
 
 }

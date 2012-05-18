@@ -1,7 +1,23 @@
 package util;
 
-public interface Observavel {
+
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Observavel {
 	
-	void addObservador(Observador o);
-	void removerObservador(Observador o);
+	
+	private List<Observador> observadores = new ArrayList<Observador>();
+	
+	
+	public void adicionarObservador(Observador o) {
+		observadores.add(o);
+	}
+	
+	
+	public void notificarObservadores(String argumento) {
+		for (Observador obs : observadores) {
+			obs.atualizar(argumento);
+		}
+	}
 }

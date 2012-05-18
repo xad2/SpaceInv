@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JOptionPane;
 
-public class Movimentador extends ModeloAbstrato {
+public class Movimentador {
 
 	private Rectangle retangulo;
 	private Rectangle espaco;
@@ -17,21 +17,19 @@ public class Movimentador extends ModeloAbstrato {
 		this.retangulo = retangulo;
 	}
 	
-	public boolean movimentarEixoX(int passo) { 
+	public boolean movimentarEixoX(int novoX) { 
 
-		int x = (int) retangulo.getX();
-		x += passo;
+		
 
-		retangulo.setLocation(x, retangulo.y);
+		retangulo.setLocation(novoX, retangulo.y);
 
 		return !consertaLimite();
 	}
 	
-	public boolean movimentarEixoY(int passo) {
-		int y = (int) retangulo.getY();
-		y += passo;
+	public boolean movimentarEixoY(int novoY) {
+		
 
-		retangulo.setLocation(retangulo.x, y);
+		retangulo.setLocation(retangulo.x, novoY);
 		
 		return !consertaLimite();
 	}
@@ -72,11 +70,6 @@ public class Movimentador extends ModeloAbstrato {
 		return fixed;
 	}
 
-	@Override
-	public void atualizar() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 

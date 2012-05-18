@@ -15,7 +15,7 @@ import edugraf.jadix.fachada.ComponenteDix;
 import edugraf.jadix.fachada.NotificavelPorDix;
 import edugraf.jadix.fachada.PaginaDix;
 
-public class TratadorDeEvento extends ControleAbstrato implements
+public class TratadorDeEvento implements
 		NotificavelPorDix {
 
 	private ControladorDoJogo controlador;
@@ -56,13 +56,7 @@ public class TratadorDeEvento extends ControleAbstrato implements
 	
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-		
-
-	}
+	
 
 	@Override
 	public void seDito(EventoDeAreaSensivel evento) {

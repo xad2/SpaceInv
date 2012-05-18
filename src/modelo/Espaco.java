@@ -18,7 +18,8 @@ public class Espaco {
 		return espaco.contains(r);
 	}
 
-	public Rectangle pegarRetangEspaco() {
+	
+	public Rectangle retangulo() {
 
 		return espaco;
 	}

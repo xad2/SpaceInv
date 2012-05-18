@@ -1,12 +1,7 @@
 package visao;
 
-import java.util.Observable;
-
-import controle.ConfigObservador;
-import controle.ControladorDaNave;
-
-import modelo.Estado;
 import modelo.Nave;
+import controle.ControladorDaNave;
 import edugraf.jadix.componentesDix.Imagem;
 import edugraf.jadix.fachada.PaginaDix;
 import edugraf.jadix.tiposPrimitivos.Coordenadas;
@@ -14,38 +9,39 @@ import edugraf.jadix.tiposPrimitivos.Coordenadas;
 public class VisaoNave extends Renderizador {
 
 	private Imagem imgNave;
-	private ControladorDaNave cNave;
 	
-	
-	
-	public VisaoNave(PaginaDix pag,ControladorDaNave cNave) {
+	public VisaoNave(PaginaDix pag, Nave naveMae) {
 		super(pag);
-		this.cNave = cNave;
+
 		this.imgNave = criarImg("Nave", "recursos/nave.png", 0,
-				new Coordenadas(cNave.getNaveMae().getXDefault(), cNave.getNaveMae().getYDefault()));
-	
-		new ConfigObservador(cNave.getNaveMae(), this);
+				new Coordenadas(240, 240));
+		new ControladorDaNave(naveMae, this);
+		
+		
 
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void atualizar(String codigo) {
 
-		if (cNave.colidiu()){
-			desabilitar();
-			criarColisao(cNave.getCoord(), "ColisaoNave", 1);
+		codigo.trim();
+
+		if (!codigo.equals("Colidiu/")) {
+			String[] valores = codigo.split("/");
+			String a = valores[0];
+			int x = Integer.parseInt(a);
+			String b = valores[1];
+			int y = Integer.parseInt(b);
+
+			imgNave.fixarEsquerda(x);
+			imgNave.fixarTopo(y);
 		}
 
-		redesenhar(imgNave, cNave.getNaveMae().getX(), cNave.getNaveMae().getY());
-
 	}
-	
+
 	public void desabilitar() {
-		
+
 		super.desabilitar(imgNave);
 	}
-
-	
-	
 
 }

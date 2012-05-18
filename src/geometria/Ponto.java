@@ -41,7 +41,7 @@ public class Ponto {
 		int x0 = this.x;
 		int y0 = this.y;
 		
-		int distancia = (y - y0) + (x - x0);
+		int distancia = (y - y0) / (x - x0);
 		
 		
 		return distancia;

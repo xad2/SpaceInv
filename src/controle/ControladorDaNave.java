@@ -1,31 +1,36 @@
 package controle;
 
-import edugraf.jadix.tiposPrimitivos.Coordenadas;
-import visao.VisaoNave;
-import modelo.Estado;
-import modelo.Nave;
+import javax.swing.JOptionPane;
 
-public class ControladorDaNave {
-	
+import modelo.Nave;
+import visao.VisaoNave;
+import edugraf.jadix.tiposPrimitivos.Coordenadas;
+
+public class ControladorDaNave extends ControleAbstrato {
+
 	private Nave naveMae;
-	
-	public ControladorDaNave(Nave naveMae) {
-		
+	private VisaoNave vNave;
+
+	public ControladorDaNave(Nave naveMae, VisaoNave vNave) {
+
 		this.naveMae = naveMae;
+		this.vNave = vNave;
+		naveMae.adicionarObservador(vNave);
+		naveMae.adicionarObservador(this);
+
 	}
-	
-	public Nave getNaveMae() {
-		return naveMae;
+
+	@Override
+	public void atualizar(String codigo) {
+
+		if (codigo.equals("Colidiu/")) {
+			JOptionPane.showMessageDialog(null, codigo);
+			vNave.desabilitar();
+			vNave.criarColisao(new Coordenadas(naveMae.getX(), naveMae.getY()),
+					"ColisaoNave", 1);
+
+		}
+
 	}
-	
-	public boolean colidiu(){
-		return naveMae.getEstado() == Estado.COLIDIU;
-	}
-	
-	public Coordenadas getCoord(){
-		
-		return new Coordenadas(naveMae.getX(), naveMae.getY());
-	}
-	
 
 }
